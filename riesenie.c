@@ -93,8 +93,8 @@ char nahodne_prepletene_slovo(char *w, unsigned int l, unsigned int n)
 			unique_chain_letters=rand()%max_unique_chain_letters+1;
 
 			chain_alphabet=split_string(shuffled_alphabet,unique_chain_letters);
-			free(chain_alphabet);
 			chain=get_chain(chain_alphabet);
+			free(chain_alphabet);
 			
 			chain_len=strlen(chain);
 			random_num=l-chain_len;
