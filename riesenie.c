@@ -29,8 +29,7 @@ char *get_chain(char *letters)
 			res[0]=c;
 			res[1]=c;
 			res[2]=0;	
-		}
-		else {
+		} else {
 			c=letters[0];
 			res[0]=c;
 			res[2]=c;
@@ -46,13 +45,13 @@ char *get_chain(char *letters)
 			res[2*l-3]=c;	 
 			res[2*l]=0;
 		}
+
 	return res;
 }
 
 char *split_string(char *s, unsigned int n)
 {
 	char *res;
-
 
 	res=malloc((n+1)*sizeof(char));
 	strncpy(res,s,n);
@@ -75,11 +74,9 @@ char nahodne_prepletene_slovo(char *w, unsigned int l, unsigned int n)
 	int k;
 	int num;
 
-	if(n < MIN_N || l < MIN_L) {
+	if(n < MIN_N || l < MIN_L) 
 		return CHYBA;
-		
-	} else {
-
+	else {
 		my_alphabet=split_string(A,n);
 		shuffled_alphabet=strfry(strdup(my_alphabet));
 
@@ -87,6 +84,7 @@ char nahodne_prepletene_slovo(char *w, unsigned int l, unsigned int n)
 			for(int i=0;i<l;i++){
 				w[i]=my_alphabet[0];
 			}
+
 			w[l]=0; 
 		} else {
 			max_unique_chain_letters=n<l/2 ? n : l/2;
@@ -102,22 +100,28 @@ char nahodne_prepletene_slovo(char *w, unsigned int l, unsigned int n)
 			
 			for(j=0;j<chain_len-2;j++){
 				w[i]=chain[j];
-				i++;	
+				i++;
+
 				if(random_num>0){
 					num=rand()%(random_num+1);
+					
 					for(k=0;k<num;k++){
 						w[i]=my_alphabet[rand()%n];
 						i++;
 					}
+
 					random_num-=num;	
 				}
 			}
+
 			w[i]=chain[chain_len-2];
 			i++;
+			
 			for(j=0;j<random_num;j++){
 				w[i]=my_alphabet[rand()%n];
 				i++;
 			}
+			
 			w[l-1]=chain[chain_len-1];
 			w[l]=0;
 
@@ -141,13 +145,12 @@ int main()
 	l=rand()%20+2;
 	n=rand()%strlen(A)+1;
 	w=malloc((l+1)*sizeof(char));
-	if(nahodne_prepletene_slovo(w,l,n)==OK){
+	
+	if(nahodne_prepletene_slovo(w,l,n)==OK)
 		printf("l:%d, n:%d, w:%s\n",l,n,w);
-	} else {
+	else 
 		printf("Nastala chyba");
-	}
+	
 	free(w);
-
-
 	return 0;
 }
