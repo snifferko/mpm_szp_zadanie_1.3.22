@@ -89,7 +89,7 @@ char nahodne_prepletene_slovo(char *w, unsigned int l, unsigned int n)
 			}
 			w[l]=0; 
 		} else {
-			types_num=n<l ? n/2 : l/2;
+			types_num=n<l/2 ? n : l/2;
 			type=rand()%types_num+1;
 
 			chain_alphabet=split_string(shuffled_alphabet,type);
