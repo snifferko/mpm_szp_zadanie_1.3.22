@@ -66,8 +66,8 @@ char nahodne_prepletene_slovo(char *w, unsigned int l, unsigned int n)
 	char *shuffled_alphabet;
 	char *chain_alphabet;
 	char *chain;
-	int types_num;
-	int type;
+	int max_unique_chain_letters;
+	int unique_chain_letters;
 	int chain_len;
 	int random_num;
 	int i;
@@ -89,10 +89,11 @@ char nahodne_prepletene_slovo(char *w, unsigned int l, unsigned int n)
 			}
 			w[l]=0; 
 		} else {
-			types_num=n<l/2 ? n : l/2;
-			type=rand()%types_num+1;
+			max_unique_chain_letters=n<l/2 ? n : l/2;
+			unique_chain_letters=rand()%max_unique_chain_letters+1;
 
-			chain_alphabet=split_string(shuffled_alphabet,type);
+			chain_alphabet=split_string(shuffled_alphabet,unique_chain_letters);
+			free(chain_alphabet);
 			chain=get_chain(chain_alphabet);
 			
 			chain_len=strlen(chain);
@@ -120,7 +121,6 @@ char nahodne_prepletene_slovo(char *w, unsigned int l, unsigned int n)
 			w[l-1]=chain[chain_len-1];
 			w[l]=0;
 
-			free(chain_alphabet);
 			free(chain);
 		}
 
